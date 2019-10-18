@@ -10,6 +10,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<flow name="helloworldFlow" doc:id="66ac6f9b-93f6-4fbb-9e84-40d2463f082e" >
 		<http:listener doc:name="Listener" doc:id="f6a3f623-601b-4bcc-9a94-c566d85dd43d" config-ref="HTTP_Listener_config" path="/abc"/>
 		<set-payload value="HelloWorld Mule Application!!" doc:name="Set Payload" doc:id="d8134ba7-af4a-4459-8ae6-d29fd46167b2" />
-		<logger level="INFO" doc:name="Logger" doc:id="2f9a4109-4aab-48c8-9acc-8a802a4fb104" message="New Payload is --&gt; #[payload]."/>
+		<logger level="INFO" doc:name="Logger" doc:id="2f9a4109-4aab-48c8-9acc-8a802a4fb104" message="The New Payload is --&gt; #[payload]."/>
 	</flow>
 </mule>

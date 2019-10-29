@@ -27,11 +27,11 @@
 				<configuration>
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>4.2.0</muleVersion>
-						<username>pxk</username>
-						<password>September@123</password>
-						<applicationName>helloworld</applicationName>
-						<environment>dev</environment>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>${username}</username>
+						<password>${password}</password>
+						<applicationName>${project.artifactId}</applicationName>
+						<environment>${env}</environment>
 					</cloudHubDeployment>				
 				</configuration>
 			</plugin>

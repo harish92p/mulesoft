@@ -28,12 +28,21 @@
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${app.runtime}</muleVersion>
-						<username>${username}</username>
-						<password>${password}</password>
-						<applicationName>${project.artifactId}</applicationName>
-						<environment>${env}</environment>
+						<username>pxk</username>
+						<password>September@123</password>
+						<applicationName>helloworld</applicationName>
+						<environment>dev</environment>
 					</cloudHubDeployment>				
 				</configuration>
+				<executions>
+				<execution>
+				<id>deploy</id>
+				<phase>deploy</phase>
+				<goals>
+				<goal>deploy</goal>
+				</goals>
+				</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

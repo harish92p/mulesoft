@@ -35,7 +35,7 @@
 						<muleVersion>${app.runtime}</muleVersion>
 						<username>pxk</username>
 						<password>September@123</password>
-						<applicationName>helloworld</applicationName>
+						<applicationName>helloworld-mss-dev-v1</applicationName>
 						<environment>dev</environment>
 						<workerType>Micro</workerType>
 						<workers>1</workers>

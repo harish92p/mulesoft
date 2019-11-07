@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xml-module="http://www.mulesoft.org/schema/mule/xml-module" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:kafka="http://www.mulesoft.org/schema/mule/kafka"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/kafka http://www.mulesoft.org/schema/mule/kafka/current/mule-kafka.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1cf5864c-9f03-45b6-8144-8f02ac348a51" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="176a782c-3dee-4148-8543-a92778c816e5" >
+		<jms:active-mq-connection username="admin" password="admin">
+			<jms:factory-configuration brokerUrl="tcp://localhost:61616" />
+		</jms:active-mq-connection>
+	</jms:config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="7dfafe6f-dd4e-4fc4-88fb-c009068d3c80" >
+		<file:connection workingDir="C:\Users\Harish\Desktop\ActiveMQ" />
+	</file:config>
+	<flow name="muletoactivemqFlow" doc:id="103c8087-9cb6-4bbb-b037-c6d673759ed5" >
+		<http:listener doc:name="Listener" doc:id="ec7d7630-acad-4343-9c01-48192531a433" config-ref="HTTP_Listener_config" path="sendmessage"/>
+		<jms:publish doc:name="Publish" doc:id="0b8773d3-70ef-4013-b968-51b77f7c3dac" config-ref="JMS_Config" destination="muleQueue"/>
+		<set-payload value="Your Mule message has been published to ActiveMQ muleQueue!!" doc:name="Set Payload" doc:id="c1a72f12-4379-4fce-9700-bbd5da550717" />
+		<logger level="INFO" doc:name="Logger" doc:id="cf8e846d-c643-4585-adf0-7a3c37ce35c5" message="Message published succesfully to the queue: muleQueue"/>
+		<jms:consume doc:name="Consume" doc:id="064085df-86ff-4879-aa8f-c9e97725ad84" config-ref="JMS_Config" destination="muleQueue"/>
+		<file:write doc:name="Write" doc:id="23cc97be-3e02-46a5-850a-47919ed88cdc" config-ref="File_Config" path="C:\Users\Harish\Desktop\ActiveMQ\activemq"/>
+	</flow>
+</mule>

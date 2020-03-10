@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4a2816aa-199f-45cf-ba97-0bed58921456" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
@@ -12,6 +13,15 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<flow name="helloworldFlow" doc:id="66ac6f9b-93f6-4fbb-9e84-40d2463f082e" >
 		<http:listener doc:name="Listener" doc:id="f6a3f623-601b-4bcc-9a94-c566d85dd43d" config-ref="HTTP_Listener_config" path="/abc"/>
 		<set-payload value="HelloWorld Mule Application!!" doc:name="Set Payload" doc:id="d8134ba7-af4a-4459-8ae6-d29fd46167b2" />
+		<ee:transform doc:name="Transform Message" doc:id="3bfa5eab-d9af-4042-9e13-1275c54854a7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var dt= '2020-03-10T00:00:00.000Z'
+---
+dt as DateTime {format: "yyyy-MM-dd'T'HH:mm:ss.SSSX"} as String {format: "yyyy-MM-dd"}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="2f9a4109-4aab-48c8-9acc-8a802a4fb104" message="The New Payload is --&gt; #[payload]. ##"/>
 	</flow>
 </mule>

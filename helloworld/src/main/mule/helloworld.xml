@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<global-property doc:name="Global Property" doc:id="fac4ed4b-7bf6-4adf-b6a2-e036102e31c1" name="env" value="dev" />
 	<flow name="helloworldFlow" doc:id="66ac6f9b-93f6-4fbb-9e84-40d2463f082e" >
 		<http:listener doc:name="Listener" doc:id="f6a3f623-601b-4bcc-9a94-c566d85dd43d" config-ref="HTTP_Listener_config" path="/abc"/>
-		<set-payload value="HelloWorld Mule Application!!" doc:name="Set Payload" doc:id="d8134ba7-af4a-4459-8ae6-d29fd46167b2" />
+		<set-payload value="HelloWorld Mule Application!!ergbehtrhu" doc:name="Set Payload" doc:id="d8134ba7-af4a-4459-8ae6-d29fd46167b2" />
 		<ee:transform doc:name="Transform Message" doc:id="3bfa5eab-d9af-4042-9e13-1275c54854a7" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
